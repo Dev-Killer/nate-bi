@@ -1,4 +1,8 @@
-window._ = require('lodash');
+window._ = require("lodash");
+
+try {
+    require("bootstrap");
+} catch (e) {}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -6,9 +10,33 @@ window._ = require('lodash');
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = require('axios');
+window.axios = require("axios");
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.baseURL = process.env.MIX_API_URL;
+window.axios.defaults.withCredentials = true;
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
+window.axios.defaults.headers.post["Content-Type"] =
+    "application/x-www-form-urlencoded";
+window.axios.interceptors.response.use(
+    // Tout code d'état qui se situe dans la plage de 2xx provoque le déclenchement de cette fonction
+    function (response) {
+        return response.data;
+    },
+
+    // Tout code d'état qui sort de la plage de 2xx provoque le déclenchement de cette fonction
+    function (error) {
+        /**
+         * Tester le code d'etat de la réponse
+         * SI c'est 401 (erreur d'auth) ALORS recharger la page
+         * SINON renvoyer les donnees de reponse
+         */
+        if (error.response.status == 401) {
+            location.reload();
+        } else {
+            return Promise.reject(error.response.data);
+        }
+    }
+);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
