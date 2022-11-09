@@ -1,9 +1,7 @@
 <template>
     <v-app style="height: 100%">
         <v-main>
-            <div>
-                <hello-world></hello-world>
-            </div>
+            <router-view></router-view>
         </v-main>
     </v-app>
 </template>
@@ -19,6 +17,10 @@ export default Vue.extend({
     components: {
         HelloWorld,
         ThemeSwitcherVue
+    },
+
+    created() {
+        this.$vuetify.theme.dark = false
     }
 });
 </script>

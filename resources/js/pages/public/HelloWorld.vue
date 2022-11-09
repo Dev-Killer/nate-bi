@@ -30,6 +30,7 @@
                         large
                         color="#FF725E"
                         style="color: whitesmoke"
+                        to="/login"
                         >Se connecter</v-btn
                     >
                 </p>
@@ -46,10 +47,6 @@ export default Vue.extend({
 
   data: () => ({
   }),
-  mounted() {
-  },
-  methods: {
-  }
 });
 </script>
 <style>

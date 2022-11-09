@@ -19,8 +19,7 @@ import moment from "./plugin/moment";
 // -----------------------------------------------------------------
 // --- Import routers
 // -----------------------------------------------------------------
-import backRouter from "./router/backoffice";
-import frontRouter from "./router/frontoffice";
+import routes from "./router/routes";
 
 /**
  * The following block of code may be used to automatically register your
@@ -33,8 +32,7 @@ import frontRouter from "./router/frontoffice";
 // -----------------------------------------------------------------
 // --- Import layouts
 // -----------------------------------------------------------------
-import AdminLayout from "./layouts/AdminLayout.vue";
-import PublicLayout from "./layouts/PublicLayout.vue";
+import Base from "./layouts/Base.vue";
 import Vue from "vue";
 
 // -----------------------------------------------------------------
@@ -77,30 +75,14 @@ Vue.prototype.$truncateString = (str, length) => {
 // -----------------------------------------------------------------
 // --- Create Apps
 // -----------------------------------------------------------------
-if (document.getElementById("back-office")) {
-    axios.defaults.baseURL = process.env.MIX_API_BACKOFFICE;
+axios.defaults.baseURL = process.env.MIX_API_BACKOFFICE;
 
-    const app1 = new Vue({
-        store,
-        vuetify,
-        swal,
-        moment,
-        el: "#back-office",
-        router: backRouter,
-        render: (h) => h(AdminLayout),
-    });
-}
-
-if (document.getElementById("front-office")) {
-    axios.defaults.baseURL = process.env.MIX_API_FRONTOFFICE;
-
-    const app2 = new Vue({
-        store,
-        vuetify,
-        swal,
-        moment,
-        el: "#front-office",
-        router: frontRouter,
-        render: (h) => h(PublicLayout),
-    });
-}
+const app1 = new Vue({
+    store,
+    vuetify,
+    swal,
+    moment,
+    el: "#front-office",
+    router: routes,
+    render: (h) => h(Base),
+});
