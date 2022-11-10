@@ -52,7 +52,7 @@ const router = new VueRouter({
             redirect: { name: "Home" },
         },
     ],
-    mode: "history",
+    mode: "hash",
     base: process.env.BASE_URL,
 });
 

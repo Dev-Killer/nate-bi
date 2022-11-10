@@ -46,6 +46,7 @@
                         :loading="isLoading"
                         rounded
                         large
+                        block
                         color="#FF725E"
                         style="color: whitesmoke"
                         @submit.prevent="redirect"

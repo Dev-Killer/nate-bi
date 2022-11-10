@@ -92,11 +92,11 @@
         </v-app-bar>
 
         <!-- Content -->
-        <v-main style="background-color: whitesmoke">
+        <v-main style="background-color: #ffeae8">
             <v-card
                 flat
                 height="100%"
-                :color="$vuetify.theme.dark ? '#232B3E' : '#ecf0f4'"
+                :color="$vuetify.theme.dark ? '#232B3E' : '#FFF5F3'"
                 class="pt-4"
                 rounded="0"
             >
@@ -178,9 +178,6 @@ export default Vue.extend({
 </script>
 <style>
 .theme--dark.v-data-table {
-    background-color: #1a202e !important;
-}
-.theme--dark.v-card {
     background-color: #1a202e !important;
 }
 .theme--light.v-tabs-items {
